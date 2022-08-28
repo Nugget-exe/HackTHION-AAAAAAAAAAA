@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Student Exchange</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Student Exchange</h1>
+    {% if posts|length < 1 %}
+    <h4 style="text-align: center">There are no posts. Create one below!</h4>
+    {% else %}
+            <div>Post</div>
+        {% for postmessage in posts %}
+                <div>{{ postmessage.content }}</div>
+                <div>{{ postmessage.date_created.date() }}</div>
+                    <a href="/delete/{{postmessage.id}}">Delete</a>
+                    <a href="/update/{{postmessage.id}}">Update</a>
+        {% endfor %}
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            <textarea name="content" rows="4" cols="50"></textarea>
+            <input type="submit" value="Add Post">
+        </form>
+    </div>
+</div>
+{% endblock %}
